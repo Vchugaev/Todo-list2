@@ -1,0 +1,99 @@
+.activity__main {
+    background-color: #e6e6e6;
+    padding: 0 48px;
+}
+
+.activity__mainBlocks {
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity__block {
+    background-color: white;
+    border-radius: 34px;
+
+}
+
+.activity__block__content {
+    padding: 32px;
+}
+
+.activity__info {
+    display: flex;
+}
+
+.activity__name {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 55px;
+}
+
+.activity__percent {
+    margin: auto;
+    margin-right: 179px;
+    font-size: 44px;
+
+}
+
+.activity__img__box {
+    background-color: #FABB181A;
+    padding: 30px;
+    border-radius: 38px;
+}
+
+
+
+.todo__block {
+    background-color: white;
+    border-radius: 34px;
+    width: 721px;
+    margin-top: 37px;
+}
+
+.todo__block__content {
+    padding: 45px;
+}
+
+
+.todo__row {
+    border: 1px solid rgb(241, 241, 241);
+    padding: 15px 17px;
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+}
+
+.hr {
+    width: 160px;
+    height: 2px;
+    background-color: #FABB18;
+    margin-top: -5px;
+}
+
+.todo__folder__box {
+    border-radius: 50%;
+    width: auto;
+    background-color: #FABB181A;
+    padding: 16px;
+}
+
+.todo__folder {
+    width: 15px;
+}
+
+.todo__time__box {
+    border-radius: 10px;
+    background-color: #FABB181A;
+    padding: 10px 20px;
+    margin-right: 23px;
+}
+
+.todo__names {
+    margin: auto 5px;
+}
+
+.todo__name__box {
+    display: flex;
+    height: 100%;
+}

@@ -1,0 +1,80 @@
+.todos__main {
+    background-color: #e6e6e6;
+    height: 100vh;
+    padding-top: 35px;
+}
+
+.todos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+
+    padding: 0 48px;
+}
+
+.todos__block {
+    background-color: white;
+    border-radius: 38px;
+}
+
+.todos__block--done {
+    background-color: white;
+    border-radius: 38px;
+    color: #00a300;
+    outline: 2px #00a300 solid;
+
+}
+
+.todos__text--done,
+.todos__name--done,
+.todos__time--done {
+    text-decoration: line-through;
+    color: #00a300;
+}
+
+.todos__content {
+    padding: 30px;
+}
+
+.todos__name {
+    font-size: 28px;
+
+}
+
+.todos__text {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.todos__time {
+    font-size: 28px;
+
+}
+
+.checkbox {
+    height: 18px;
+    width: 18px;
+}
+
+.todos__name__heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete__task {
+    font-size: 28px;
+    animation: delete 1s forwards;
+    background-color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@keyframes delete {
+    0% {
+        color: white;
+    }
+
+    100% {
+        color: red;
+    }
+}

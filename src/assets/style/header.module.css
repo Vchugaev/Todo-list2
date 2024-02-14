@@ -1,0 +1,91 @@
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: 0;
+    box-sizing: content-box;
+    font-family: 'Poppins';
+    list-style: none;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Arimo-VariableFont_wght.ttf');
+}
+
+.header {
+    height: 120px;
+    width: 100%;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    padding: 31px;
+}
+
+.dashboard--image {
+    width: auto;
+    height: 24px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.dashboard--text {
+    margin: auto;
+    font-size: 28px;
+}
+
+.right__box {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    width: 210px;
+}
+
+.search__input {
+    background-image: url('../img/search.png');
+    background-repeat: no-repeat;
+    background-position: 95%;
+}
+
+.search__input {
+    width: 509px;
+    background-color: #EFEFEF78;
+    padding: 17px 36px;
+    border-radius: 18px;
+    margin: auto;
+}
+
+.notifications {
+    margin: auto 0;
+}
+
+.name {
+    margin: auto;
+    margin-right: 31px;
+}
+
+.name--text {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    text-align: right;
+}
+
+.description--text {
+    color: rgb(143, 143, 143);
+    font-size: 12px;
+    line-height: 18px;
+    text-align: right;
+}
+
+.account {
+    display: flex;
+}
