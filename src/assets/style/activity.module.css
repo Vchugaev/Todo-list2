@@ -63,13 +63,13 @@
     display: grid;
     grid-template-columns: auto 1fr 1fr 1fr;
 }
-
+/* 
 .hr {
     width: 160px;
     height: 2px;
     background-color: #FABB18;
     margin-top: -5px;
-}
+} */
 
 .todo__folder__box {
     border-radius: 50%;

@@ -115,7 +115,7 @@ export default function Activity() {
                                             <div className={activityStyles.todo__time__box}>{task.remainingTime}</div>
                                         </th>
                                         <th>
-                                            <div className={activityStyles.todo__hr__box}><hr className="h" /></div>
+                                            <div className="h-full flex"><hr className="m-auto h-1 w-full rounded bg-yellow border-yellow" /></div>
                                         </th>
                                     </div>
                                 </tr>

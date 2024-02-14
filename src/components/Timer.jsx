@@ -4,13 +4,6 @@ import Activity from "../Activity";
 export default function Timer(props) {
     useEffect(() => {
         const timers = props.tasks.map((task, index) => {
-            if (task.delete) {
-                const updatedTasks = [...props.tasks];
-                updatedTasks.splice(index, 1); // Удаляем задачу по индексу
-                props.setTasks(updatedTasks);
-                localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Обновляем localStorage
-                return;
-            }
             const endDate = new Date(`${task.date}T${task.time}`);
             const endTimeInSeconds = Math.floor(endDate.getTime() / 1000);
             const timer = setInterval(() => {

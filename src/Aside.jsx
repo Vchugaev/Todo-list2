@@ -10,7 +10,7 @@ export default function Aside(props) {
 
 
     return <aside className={asideStyle.aside} style={props.aside ? { width: 'auto' } : { marginLeft: '-400px' }}>
-        <div className={asideStyle.logo}><h1>VCHUGAEV TASKS.</h1></div>
+        <div className="w-full flex h-32 text-1xl"><h1 className="text-center m-auto">VCHUGAEV <span className="bg-yellow p-2 rounded">TASKS.</span></h1></div>
         <nav className={asideStyle.nav}>
             <a href="/dashboard">
                 <div className={isDashboardPage ? `${asideStyle["dashboard--li"]} ${asideStyle.active}` : asideStyle["dashboard--li"]} onClick={() => props.setDisplay(true)}>
