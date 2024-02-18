@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import activityStyles from './assets/style/activity.module.css'; // Импорт модуля стилей
+import activityStyles from './assets/style/activity.module.css'
 import { useStopwatch } from 'react-timer-hook';
 import ActivityTimer from "./components/Timer";
+import * as Progress from '@radix-ui/react-progress';
+import TimeToProgress from "./components/TimeToProgress";
+import { useLocalStorage } from "@uidotdev/usehooks";
+
 
 function MyStopwatch() {
     const {
@@ -25,45 +29,28 @@ function MyStopwatch() {
 }
 
 export default function Activity() {
+    const [tasks, setTasks] = useLocalStorage('tasks', [])
+    const [accessTasks, setAccessTasks] = useLocalStorage('accessTasks', [])
+    const [failedTasks, setFailedTasks] = useLocalStorage('failedTasks', [])
+    let percentAccessTasks = Math.round(accessTasks.length / (accessTasks.length + failedTasks.length) * 100)
+    const onDelete = (taskId) => {
+        setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+    };
 
-    function getItemFromLocalStorage(key) {
-        const itemString = localStorage.getItem(key);
-        try {
-            const item = JSON.parse(itemString);
-            return item;
-        } catch (error) {
-            console.error('Ошибка при парсинге JSON:', error);
-            return null;
-        }
-    }
 
-    function addItemToLocalStorage(key, item) {
-        localStorage.setItem(key, JSON.stringify(item))
-    }
 
-    const [tasks, setTasks] = useState(getItemFromLocalStorage('tasks'))
 
-    if (getItemFromLocalStorage('accessTasks') === null) {
-        addItemToLocalStorage('accessTasks', 1)
-    }
 
-    if (getItemFromLocalStorage('failTasks') === null) {
-        addItemToLocalStorage('failTasks', 0)
-    }
-
-    const accessTasks = getItemFromLocalStorage('accessTasks')
-    const failTasks = getItemFromLocalStorage('failTasks')
-    const percentActive = Math.floor((accessTasks / (accessTasks + failTasks)) * 100)
-
+    
     return (
         <main className={activityStyles.activity__main}>
-            <ActivityTimer tasks={tasks} setTasks={setTasks} />
+
             <div className={activityStyles.activity__mainBlocks}>
                 <div className={activityStyles.activity__block}>
                     <div className={activityStyles.activity__block__content}>
                         <h4 className={activityStyles.activity__name}>Выполнено задач</h4>
                         <div className={activityStyles.activity__info}>
-                            <span className={activityStyles.activity__percent}>{percentActive}%</span>
+                            <span className={activityStyles.activity__percent}>{isNaN(percentAccessTasks) ? '0' : percentAccessTasks}%</span>
                             <div className={activityStyles.activity__img__box}>
                                 <img src={require('./assets/img/arrows.png')} alt="" />
                             </div>
@@ -83,9 +70,9 @@ export default function Activity() {
                 </div>
                 <div className={activityStyles.activity__block}>
                     <div className={activityStyles.activity__block__content}>
-                        <h4 className={activityStyles.activity__name}>Задачи</h4>
+                        <h4 className={activityStyles.activity__name}>Активные задачи</h4>
                         <div className={activityStyles.activity__info}>
-                            <span className={activityStyles.activity__percent}>{accessTasks}</span>
+                            <span className={activityStyles.activity__percent}>{tasks.length}</span>
                             <div className={activityStyles.activity__img__box}>
                                 <img src={require('./assets/img/folder.png')} alt="" />
                             </div>
@@ -95,10 +82,10 @@ export default function Activity() {
             </div>
             <div className={activityStyles.todo__block}>
                 <div className={activityStyles.todo__block__content}>
-                    <h4 className={activityStyles.todo__name}>To Do</h4>
+                    <h4 className={activityStyles.todo__name}>Ваши задачи</h4>
                     <div className={activityStyles.todo__info}>
                         <table className={activityStyles.todo__table}>
-                            {tasks.map(task => (
+                            {tasks.map((task, index) => (
                                 <tr key={task.id}>
                                     <div className={activityStyles.todo__row}>
                                         <th>
@@ -108,14 +95,16 @@ export default function Activity() {
                                         </th>
                                         <th>
                                             <div className={activityStyles.todo__name__box}>
-                                                <span className={activityStyles.todo__names}>{task.formName}</span>
+                                                <span className={activityStyles.todo__names}>{task.formName.length > 15 ? task.formName.slice(0, 15) + '...' : task.formName}</span>
                                             </div>
                                         </th>
                                         <th>
-                                            <div className={activityStyles.todo__time__box}>{task.remainingTime}</div>
+                                            <div className={activityStyles.todo__time__box}><ActivityTimer key={task.id} task={task} onDelete={onDelete} /></div>
                                         </th>
                                         <th>
-                                            <div className="h-full flex"><hr className="m-auto h-1 w-full rounded bg-yellow border-yellow" /></div>
+                                            <div className="h-full w-full flex">
+                                                <TimeToProgress props={task} />
+                                            </div>
                                         </th>
                                     </div>
                                 </tr>

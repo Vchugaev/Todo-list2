@@ -1,7 +1,7 @@
 .today__block {
     display: flex;
     justify-content: space-between;
-    background-color: #e6e6e6;
+    background-color: #F9F9F9;
     padding: 67px 48px;
     border-radius: 38px 0 0 0;
 }
@@ -56,7 +56,7 @@
 
 .create__task__form--input {
     padding: 15px;
-    background-color: #e6e6e6;
+    background-color: #F9F9F9;
     border-radius: 16px;
     margin-bottom: 20px;
     margin-top: 10px;
@@ -66,7 +66,7 @@
     padding: 15px;
     width: 93%;
     height: 100px;
-    background-color: #e6e6e6;
+    background-color: #F9F9F9;
     border-radius: 16px;
     margin-bottom: 20px;
     margin-top: 10px;
@@ -85,14 +85,14 @@
 }
 
 .create__task__date-date {
-    background-color: #e6e6e6;
+    background-color: #F9F9F9;
     padding: 0 15px;
     height: 50px;
     margin-right: 10px;
     border-radius: 10px;
 }
 .create__task__date-time {
-    background-color: #e6e6e6;
+    background-color: #F9F9F9;
     padding: 0 15px;
     height: 50px;
     border-radius: 10px;

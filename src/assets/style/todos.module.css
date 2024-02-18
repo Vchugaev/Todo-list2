@@ -1,7 +1,8 @@
 .todos__main {
-    background-color: #e6e6e6;
+    background-color: #F9F9F9;
     height: 100vh;
     padding-top: 35px;
+    border-radius: 38px 0 0 0;
 }
 
 .todos {
@@ -63,18 +64,19 @@
 
 .delete__task {
     font-size: 28px;
-    animation: delete 1s forwards;
+    animation: delete 500ms forwards;
     background-color: white;
     text-decoration: underline;
     cursor: pointer;
+    float: right;
 }
 
 @keyframes delete {
     0% {
-        color: white;
+        opacity: 0;
     }
 
     100% {
-        color: red;
+        opacity: 1;
     }
 }

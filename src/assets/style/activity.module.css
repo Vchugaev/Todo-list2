@@ -1,10 +1,10 @@
 .activity__main {
-    background-color: #e6e6e6;
+    background-color: #F9F9F9;
     padding: 0 48px;
 }
 
 .activity__mainBlocks {
-    background-color: #e6e6e6;
+    background-color: #F9F9F9;
     display: flex;
     justify-content: space-between;
 }
@@ -41,8 +41,9 @@
     padding: 30px;
     border-radius: 38px;
 }
-
-
+.todo__table{
+    width: 100%;
+}
 
 .todo__block {
     background-color: white;
@@ -73,11 +74,16 @@
 
 .todo__folder__box {
     border-radius: 50%;
-    width: auto;
+    width: 20px;
+    height: 20px;
     background-color: #FABB181A;
     padding: 16px;
 }
-
+th{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
 .todo__folder {
     width: 15px;
 }
@@ -87,6 +93,7 @@
     background-color: #FABB181A;
     padding: 10px 20px;
     margin-right: 23px;
+    margin: auto;
 }
 
 .todo__names {

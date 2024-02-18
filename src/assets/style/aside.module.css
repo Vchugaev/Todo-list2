@@ -3,10 +3,14 @@
     padding: 23px 78px;
     border-radius: 18px;
 }
-.aside{
+
+.aside {
     width: auto;
     transition: 200ms;
+    display: flex;
+    flex-direction: column;
 }
+
 .active {
     background-color: rgb(39, 39, 39);
     color: white;
@@ -40,4 +44,74 @@ h1 {
 
 .nav {
     margin: 0 50px;
+}
+
+.HoverCardContent {
+    animation-duration: 400ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.HoverCardContent[data-side='top'] {
+    animation-name: slideDownAndFade;
+}
+
+.HoverCardContent[data-side='right'] {
+    animation-name: slideLeftAndFade;
+}
+
+.HoverCardContent[data-side='bottom'] {
+    animation-name: slideUpAndFade;
+}
+
+.HoverCardContent[data-side='left'] {
+    animation-name: slideRightAndFade;
+}
+
+@keyframes slideUpAndFade {
+    0% {
+        opacity: 0;
+        transform: translateY(2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideRightAndFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideDownAndFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideLeftAndFade {
+    0% {
+        opacity: 0;
+        transform: translateX(2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

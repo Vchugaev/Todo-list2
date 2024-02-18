@@ -1,42 +1,56 @@
-import React, { useEffect } from "react";
-import Activity from "../Activity";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import React, { useState, useEffect } from "react";
 
-export default function Timer(props) {
-    useEffect(() => {
-        const timers = props.tasks.map((task, index) => {
-            const endDate = new Date(`${task.date}T${task.time}`);
-            const endTimeInSeconds = Math.floor(endDate.getTime() / 1000);
-            const timer = setInterval(() => {
-                const now = new Date();
-                const currentTimeInSeconds = Math.floor(now.getTime() / 1000);
-                const remainingTimeInSeconds = endTimeInSeconds - currentTimeInSeconds;
-                if (remainingTimeInSeconds <= 0) {
-                    clearInterval(timer);
-                    const updatedTasks = [...props.tasks];
-                    updatedTasks.splice(index, 1); // Удаляем задачу по индексу
-                    props.setTasks(updatedTasks);
-                    localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Обновляем localStorage
-                    return;
-                }
-                const remainingDays = Math.floor(remainingTimeInSeconds / (3600 * 24));
-                const remainingHours = Math.floor((remainingTimeInSeconds % (3600 * 24)) / 3600);
-                const remainingMinutes = Math.floor((remainingTimeInSeconds % 3600) / 60);
-                const remainingSeconds = remainingTimeInSeconds % 60;
-                props.setTasks(prevTasks => prevTasks.map(prevTask => {
-                    if (prevTask === task) {
-                        return {
-                            ...prevTask,
-                            remainingTime: `${remainingHours >= 10 ? remainingHours : '0' + remainingHours}:${remainingMinutes >= 10 ? remainingMinutes : '0' + remainingMinutes}:${remainingSeconds >= 10 ? remainingSeconds : '0' + remainingSeconds}`
-                        };
-                    }
-                    return prevTask;
-                }));
-            }, 1000);
-            return timer;
-        });
-        return () => {
-            timers.forEach(timer => clearInterval(timer));
+export default function ActivityTimer({ task, onDelete }) {
+    const endDate = new Date(`${task.date}T${task.time}`);
+    const endTime = endDate.getTime();
+
+
+    const [failedTasks, setFailedTasks] = useLocalStorage('failedTasks', [])
+    const [tasks, setTasks] = useLocalStorage('tasks', [])
+
+    const calculateTimeLeft = () => {
+        const now = new Date().getTime();
+        const distance = endTime - now;
+
+        if (distance <= 0) {
+            onDelete(task.id);
+            const fail = tasks.filter(failTask => task.id === failTask.id)
+            failedTasks.push(...fail)
+            localStorage.setItem('failedTasks', JSON.stringify(failedTasks))
+            
+            return {
+                hours: '00',
+                minutes: '00',
+                seconds: '00'
+            };
+            
+        }
+
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        return {
+            hours: hours < 10 ? `0${hours}` : hours.toString(),
+            minutes: minutes < 10 ? `0${minutes}` : minutes.toString(),
+            seconds: seconds < 10 ? `0${seconds}` : seconds.toString()
         };
-    }, [props.tasks]);
-    // return <Activity />
+    };
+
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft(calculateTimeLeft());
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
+        <span>
+            {timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}
+        </span>
+    );
 }
