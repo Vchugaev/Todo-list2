@@ -18,6 +18,7 @@ import grandpa from './avatars/grandpa.jpg'
 import green from './avatars/green.jpg'
 import pink from './avatars/pink.jpg'
 import yellow from './avatars/yellow.jpg'
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 
 
@@ -60,7 +61,7 @@ export default function Header(props) {
             return null;
         }
     }
-    const fails = getItemFromLocalStorage('failedTasks')
+    const fails = useLocalStorage('failedTasks', [])
     const failedTasks = fails.filter(fail => fail.delete === false)
 
 
