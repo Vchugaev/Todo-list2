@@ -38,26 +38,31 @@ export default function Todos() {
     }
 
     const [checked, setChecked] = useState(false)
-
+    const [failedTasks, setFailedTasks] = useState(getItemFromLocalStorage('failedTasks') || []);
     const deleteTasks = (task, index, num) => {
-        //Удаление задачи (1 - выполнено, 2 - не выполнено, 3 - просто удалить)
-        const updatedTasks = [...tasks]
-        updatedTasks.splice(index, 1)
-        setTasks(updatedTasks)
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks))
-
+        // Удаление задачи (1 - выполнено, 2 - не выполнено, 3 - просто удалить)
+        const updatedTasks = [...tasks];
+        updatedTasks.splice(index, 1);
+        setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    
         if (num === 1) {
-            let accessTasks = getItemFromLocalStorage('accessTasks')
-            const access = tasks.filter(accessTask => task.id === accessTask.id)
-            accessTasks.push(...access)
-            localStorage.setItem('accessTasks', JSON.stringify(accessTasks))
+            let accessTasks = getItemFromLocalStorage('accessTasks') || [];
+            const access = tasks.filter(accessTask => task.id === accessTask.id);
+            if (access.length) {
+                accessTasks.push(...access);
+                localStorage.setItem('accessTasks', JSON.stringify(accessTasks));
+            }
         } else if (num === 2) {
-            let failedTasks = getItemFromLocalStorage('failedTasks')
-            const fail = tasks.filter(failedTask => task.id === failedTask.id)
-            failedTasks.push(...fail)
-            localStorage.setItem('failedTasks', JSON.stringify(failedTasks))
+            let failedTasks = getItemFromLocalStorage('failedTasks') || [];
+            const fail = tasks.filter(failedTask => task.id === failedTask.id);
+            if (fail.length) {
+                setFailedTasks([...failedTasks, ...fail]);
+                localStorage.setItem('failedTasks', JSON.stringify([...failedTasks, ...fail]));
+            }
         }
-    }
+    };
+    
 
 
     const handleToggle = (index) => {

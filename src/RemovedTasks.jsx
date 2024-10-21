@@ -12,7 +12,8 @@ export default function RempvedTasks() {
 
         <h2 className="mx-12 mb-12 text-5xl">Архив невыполненных задач</h2>
         <div className={todoStyles.todos}>
-            {tasks.filter(task => task.formName.toLowerCase().includes(searchValue.toLowerCase()) || task.text.toLowerCase().includes(searchValue.toLowerCase()))
+            {tasks
+            .filter(task => task.formName.toLowerCase().includes(searchValue.toLowerCase()) || task.text.toLowerCase().includes(searchValue.toLowerCase()))
                 .map((task, index) => (
                     <div key={task.id} className="bg-white rounded-3xl outline-red outline"> 
                         <div className={todoStyles.todos__content}>

@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    box-sizing: border-box;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 25px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background: rgb(247, 247, 247);
+    width: 300px;
+    height: 300px;
+}
+
+.btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: 230px;
+}
+
+.btnTrash {
+    composes: btn;
+}
+
+.btnTrash:hover svg path {
+    stroke: red;
+}
+
+.left{
+    margin-top: 50px;
+}
+
+.text{
+    width: 200px;
+    height: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
